@@ -3,6 +3,8 @@ import { HeroSection } from "@/components/landing/HeroSection";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 import { LandingHeader } from "@/components/landing/LandingHeader";
 
+export const dynamic = "force-dynamic";
+
 export default function Home() {
   return (
     <div className="landing-page relative h-screen w-full overflow-hidden bg-crcle-bg text-foreground">
