@@ -1,0 +1,579 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050508;
+  --foreground: #f7f6f2;
+  --crcle-bg: #020315;
+  --crcle-ink: #f7f6f2;
+  --crcle-muted: #676874;
+  --crcle-muted-light: #9998a1;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-white: var(--crcle-ink);
+  --color-crcle-bg: var(--crcle-bg);
+  --color-crcle-muted: var(--crcle-muted);
+  --color-crcle-muted-light: var(--crcle-muted-light);
+  --font-sans: var(--font-montserrat), var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  background: var(--crcle-bg);
+}
+
+body {
+  background: var(--crcle-bg);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.landing-page {
+  color-scheme: dark;
+  /* Figma desktop frame 1728×1117 — full viewport shell */
+  min-height: 100vh;
+  height: 100vh;
+}
+
+/* Shared horizontal gutter: max-w 1728 centered + px-6 / sm:10 / lg:84 */
+.crcle-gutter-right {
+  right: max(1.5rem, calc((100vw - 1728px) / 2 + 1.5rem));
+}
+
+.crcle-gutter-left {
+  left: max(1.5rem, calc((100vw - 1728px) / 2 + 1.5rem));
+}
+
+.crcle-gutter-inset-x {
+  left: max(1.5rem, calc((100vw - 1728px) / 2 + 1.5rem));
+  right: max(1.5rem, calc((100vw - 1728px) / 2 + 1.5rem));
+}
+
+@media (min-width: 640px) {
+  .crcle-gutter-right {
+    right: max(2.5rem, calc((100vw - 1728px) / 2 + 2.5rem));
+  }
+
+  .crcle-gutter-left {
+    left: max(2.5rem, calc((100vw - 1728px) / 2 + 2.5rem));
+  }
+
+  .crcle-gutter-inset-x {
+    left: max(2.5rem, calc((100vw - 1728px) / 2 + 2.5rem));
+    right: max(2.5rem, calc((100vw - 1728px) / 2 + 2.5rem));
+  }
+}
+
+@media (min-width: 1024px) {
+  .crcle-gutter-right {
+    right: max(84px, calc((100vw - 1728px) / 2 + 84px));
+  }
+
+  .crcle-gutter-left {
+    left: max(84px, calc((100vw - 1728px) / 2 + 84px));
+  }
+
+  .crcle-gutter-inset-x {
+    left: max(84px, calc((100vw - 1728px) / 2 + 84px));
+    right: max(84px, calc((100vw - 1728px) / 2 + 84px));
+  }
+}
+
+/* Figma 2389:41139 — interlocking Crcle-O ring tile (public/landing/bg-pattern.svg) */
+.bg-pattern {
+  background-color: #020315;
+  background-image: url("/landing/bg-pattern.svg");
+  background-repeat: repeat;
+  background-position: center;
+  opacity: 0.22;
+}
+
+.liquid-pill {
+  isolation: isolate;
+  background:
+    linear-gradient(180deg, rgba(247, 246, 242, 0.18) 0%, rgba(247, 246, 242, 0.05) 48%, rgba(247, 246, 242, 0.1) 100%);
+  border: 1px solid rgba(247, 246, 242, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -10px 18px rgba(247, 246, 242, 0.06),
+    0 8px 24px rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+}
+
+.header-nav-pill {
+  isolation: isolate;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.35),
+    inset 0 -8px 16px rgba(247, 246, 242, 0.05),
+    0 6px 20px rgba(0, 0, 0, 0.22);
+}
+
+.header-toggle-disc {
+  pointer-events: none;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 9999px;
+  background: #f7f6f2;
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.header-toggle-disc.is-menu {
+  transform: translateX(54px);
+}
+
+.header-toggle-disc.is-eye {
+  transform: translateX(0);
+}
+
+.header-pill-button {
+  transition: transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.header-pill-button:hover {
+  transform: scale(1.08);
+}
+
+.header-pill-button:active {
+  transform: scale(0.9);
+  transition-duration: 0.14s;
+  transition-timing-function: cubic-bezier(0.36, 0.9, 0.42, 1);
+}
+
+/* CS-109 / CS-115 — Connected Accounts label: solid ink, no parent fade */
+[data-connected-accounts-label] {
+  color: #f7f6f2;
+  opacity: 1;
+}
+
+[data-header-wordmark] {
+  color: #f7f6f2;
+  opacity: 1;
+}
+
+@keyframes crcle-logo-cursor-blink {
+  0%,
+  48% {
+    opacity: 1;
+  }
+
+  52%,
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.crcle-logo-typewriter-cursor--blink {
+  animation: crcle-logo-cursor-blink 0.85s ease-in-out infinite;
+}
+
+.crcle-logo-typewriter-cursor--fade-out {
+  animation: none;
+  opacity: 0;
+  transition: opacity 0.48s ease-out;
+}
+
+.menu-row-lock-icon {
+  opacity: 1;
+}
+
+/* CS-95 — signal bars stay #F7F6F2; soft pulse only */
+.header-pill-signal-icon {
+  animation: header-signal-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes header-signal-pulse {
+  0%,
+  100% {
+    opacity: 0.62;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.72;
+    transform: scale(1.06);
+  }
+}
+
+.header-pill-hamburger-idle {
+  opacity: 0.62;
+}
+
+.header-nav-pill:hover {
+  border-color: rgba(247, 246, 242, 0.32);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.48),
+    inset 0 -8px 16px rgba(247, 246, 242, 0.07),
+    0 8px 26px rgba(0, 0, 0, 0.28);
+}
+
+.liquid-pill::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -40% -60%;
+  background: linear-gradient(
+    115deg,
+    transparent 32%,
+    rgba(255, 255, 255, 0.28) 48%,
+    rgba(19, 136, 129, 0.12) 54%,
+    transparent 68%
+  );
+  animation: liquid-sheen 6s ease-in-out infinite;
+}
+
+@keyframes liquid-sheen {
+  0%,
+  100% {
+    transform: translateX(-12%) rotate(8deg);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translateX(18%) rotate(8deg);
+    opacity: 0.9;
+  }
+}
+
+/* Figma 2367:33937 — HeaderPill, Contact us, ProductMenu liquid glass */
+.crcle-liquid-glass {
+  isolation: isolate;
+  border: 1px solid rgb(255 255 255 / 0.2);
+  background-image: linear-gradient(to bottom, rgb(255 255 255 / 0.15), rgb(255 255 255 / 0.05));
+  box-shadow:
+    inset 0 1px 1px 0 rgb(255 255 255 / 0.35),
+    0 8px 32px rgb(0 0 0 / 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.crcle-liquid-glass-disc {
+  background: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.2);
+}
+
+/* Footer Contact us — frost hero phone/arm behind pill */
+[data-contact-cluster] {
+  background-color: rgb(0 0 0 / 0.26);
+  backdrop-filter: blur(41px) saturate(162%);
+  -webkit-backdrop-filter: blur(41px) saturate(162%);
+}
+
+[data-contact-cluster] .crcle-liquid-glass-disc {
+  background-color: #f7f6f2 !important;
+}
+
+/* CS-60 — frosted liquid glass over hero phone / emblem */
+.product-menu-liquid-glass {
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background-color: rgb(0 0 0 / 0.4);
+  background-image:
+    linear-gradient(
+      155deg,
+      rgb(255 255 255 / 0.14) 0%,
+      rgb(255 255 255 / 0.03) 28%,
+      rgb(0 0 0 / 0.06) 52%,
+      rgb(19 136 129 / 0.08) 78%,
+      rgb(255 200 140 / 0.05) 100%
+    );
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.45),
+    inset 0 -12px 24px rgb(255 255 255 / 0.04),
+    0 8px 32px rgb(0 0 0 / 0.37);
+  backdrop-filter: blur(56px) saturate(185%) brightness(0.92) !important;
+  -webkit-backdrop-filter: blur(56px) saturate(185%) brightness(0.92);
+}
+
+.product-menu-backdrop-frost {
+  backdrop-filter: blur(56px) saturate(185%) brightness(0.92) !important;
+  -webkit-backdrop-filter: blur(56px) saturate(185%) brightness(0.92);
+}
+
+.product-menu-liquid-glass::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: -45% -65%;
+  z-index: 0;
+  opacity: 0.72;
+  background: linear-gradient(
+    115deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.24) 46%,
+    rgb(19 136 129 / 0.14) 52%,
+    rgb(255 210 160 / 0.09) 58%,
+    transparent 72%
+  );
+  animation: product-menu-sheen 6s ease-in-out infinite;
+}
+
+.product-menu-liquid-glass::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgb(255 255 255 / 0.42) 0%,
+    rgb(255 255 255 / 0.1) 22%,
+    rgb(19 136 129 / 0.16) 48%,
+    rgb(255 255 255 / 0.06) 72%,
+    rgb(255 200 140 / 0.14) 100%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.72;
+}
+
+@keyframes product-menu-sheen {
+  0%,
+  100% {
+    transform: translateX(-12%) rotate(8deg);
+    opacity: 0.38;
+  }
+  50% {
+    transform: translateX(18%) rotate(8deg);
+    opacity: 0.62;
+  }
+}
+
+.product-menu-liquid-glass-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+@media (max-width: 639px) {
+  .product-menu-liquid-glass-inner {
+    flex-direction: row;
+  }
+}
+
+/* Product menu — below header row (mobile: full width between gutters / logo) */
+.product-menu-anchor {
+  position: fixed;
+  /* mobile: pt-14 + trigger h-10 + 16px gap */
+  top: calc(3.5rem + 2.5rem + 1rem);
+  z-index: 65;
+  pointer-events: none;
+}
+
+@media (max-width: 639px) {
+  .product-menu-anchor {
+    left: max(1.5rem, calc((100vw - 1728px) / 2 + 1.5rem));
+    right: max(1.5rem, calc((100vw - 1728px) / 2 + 1.5rem));
+    width: auto;
+    max-width: none;
+  }
+
+  .product-menu-anchor #products-menu {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (min-width: 640px) {
+  .product-menu-anchor {
+    /* sm: pt-[84px] + min row 50px + 16px gap */
+    top: calc(84px + 50px + 16px);
+    left: auto;
+    right: max(2.5rem, calc((100vw - 1728px) / 2 + 2.5rem));
+    width: min(305px, calc(100vw - 48px));
+    max-width: min(305px, calc(100vw - 48px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-menu-anchor {
+    right: max(84px, calc((100vw - 1728px) / 2 + 84px));
+  }
+}
+
+#products-menu {
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  #products-menu {
+    width: min(305px, calc(100vw - 48px));
+    max-width: min(305px, calc(100vw - 48px));
+  }
+}
+
+/* Figma 2140:102093 — uniform chat scrim frost */
+.chat-overlay-root {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  isolation: isolate;
+}
+
+.chat-overlay-frost {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  transform: translateZ(0);
+  background-color: rgb(2 3 21 / 0.45);
+  backdrop-filter: blur(24px) saturate(150%);
+  -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+
+.chat-overlay-hit {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: default;
+  background: transparent;
+}
+
+.sound-wave-bars {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 33px;
+  width: 38px;
+}
+
+.sound-wave-bars span {
+  display: block;
+  flex: 0 0 9px;
+  width: 9px;
+  border-radius: 8px;
+  background: #b1b1bc;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  transform-origin: center;
+  animation-duration: 3.3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.sound-wave-bars span:nth-child(1) {
+  height: 20px;
+  animation-name: sound-wave-left;
+}
+
+.sound-wave-bars span:nth-child(2) {
+  height: 33px;
+  opacity: 0.28;
+  animation-name: sound-wave-mid;
+  animation-delay: 200ms;
+}
+
+.sound-wave-bars span:nth-child(3) {
+  height: 20px;
+  opacity: 0.28;
+  animation-name: sound-wave-right;
+  animation-delay: 400ms;
+}
+
+@keyframes sound-wave-left {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  14% {
+    transform: scaleY(0.56);
+    opacity: 0.45;
+  }
+  28% {
+    transform: scaleY(1);
+    opacity: 0.85;
+  }
+  42% {
+    transform: scaleY(0.83);
+    opacity: 0.5;
+  }
+  57% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  71% {
+    transform: scaleY(0.39);
+    opacity: 0.3;
+  }
+  85% {
+    transform: scaleY(0.78);
+    opacity: 0.7;
+  }
+}
+
+@keyframes sound-wave-mid {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.28;
+  }
+  25% {
+    transform: scaleY(0.82);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  75% {
+    transform: scaleY(0.9);
+    opacity: 0.4;
+  }
+}
+
+@keyframes sound-wave-right {
+  0%,
+  100% {
+    transform: scaleY(1);
+    opacity: 0.28;
+  }
+  14% {
+    transform: scaleY(1);
+    opacity: 0.35;
+  }
+  28% {
+    transform: scaleY(0.61);
+    opacity: 0.7;
+  }
+  42% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  57% {
+    transform: scaleY(0.44);
+    opacity: 0.35;
+  }
+  71% {
+    transform: scaleY(0.83);
+    opacity: 0.55;
+  }
+  85% {
+    transform: scaleY(0.83);
+    opacity: 0.4;
+  }
+}

@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="504" height="534" viewBox="0 0 504 534" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="stroke0_0_4" fill="white">
+<path d="M462.025 492.441C383.818 571.103 261.886 520.878 177.635 482.243C100.109 446.702 -48.6971 344.036 15.7973 235.962C34.4461 204.716 43.596 201.821 66.1612 174.462C116.342 113.604 171.87 42.8622 240.673 13.9028C346.111 -30.4795 382.458 38.6804 427.623 118.656C480.211 211.776 550.157 403.807 462.025 492.441Z"/>
+</mask>
+<path id="Vector" d="M462.025 492.441C383.818 571.103 261.886 520.878 177.635 482.243C100.109 446.702 -48.6971 344.036 15.7973 235.962C34.4461 204.716 43.596 201.821 66.1612 174.462C116.342 113.604 171.87 42.8622 240.673 13.9028C346.111 -30.4795 382.458 38.6804 427.623 118.656C480.211 211.776 550.157 403.807 462.025 492.441Z" stroke-width="2" stroke="url(#paint0_linear_0_4)" mask="url(#stroke0_0_4)"/>
+<defs>
+<linearGradient id="paint0_linear_0_4" x1="487.002" y1="422.344" x2="268.017" y2="-0.169922" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#138881" stop-opacity="0.2"/>
+</linearGradient>
+</defs>
+</svg>
