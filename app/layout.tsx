@@ -23,6 +23,8 @@ export const metadata: Metadata = {
   description: "We're intent-based connection. crcle app, crcle tv, and more.",
 };
 
+export const dynamic = "force-dynamic";
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Suspense } from "react";
 import { HeroSection } from "@/components/landing/HeroSection";
 import { LandingFooter } from "@/components/landing/LandingFooter";
 import { LandingHeader } from "@/components/landing/LandingHeader";
@@ -10,11 +11,15 @@ export default function Home() {
     <div className="landing-page relative h-screen w-full overflow-hidden bg-crcle-bg text-foreground">
       <div className="bg-pattern pointer-events-none absolute inset-0 z-0" aria-hidden />
 
-      <LandingHeader />
+      <Suspense fallback={null}>
+        <LandingHeader />
+      </Suspense>
 
       <div className="relative z-10 mx-auto h-full w-full max-w-[1728px] px-6 sm:px-10 lg:px-[84px]">
         <div className="relative h-full w-full">
-          <HeroSection />
+          <Suspense fallback={null}>
+            <HeroSection />
+          </Suspense>
         </div>
       </div>
 
@@ -32,7 +37,9 @@ export default function Home() {
         />
       </div>
 
-      <LandingFooter />
+      <Suspense fallback={null}>
+        <LandingFooter />
+      </Suspense>
     </div>
   );
 }
