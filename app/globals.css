@@ -3,7 +3,7 @@
 :root {
   --background: #050508;
   --foreground: #f7f6f2;
-  --crcle-bg: #020315;
+  --crcle-bg: #01010d;
   --crcle-ink: #f7f6f2;
   --crcle-muted: #676874;
   --crcle-muted-light: #9998a1;
@@ -83,7 +83,7 @@ body {
 
 /* Figma 2389:41139 — interlocking Crcle-O ring tile (public/landing/bg-pattern.svg) */
 .bg-pattern {
-  background-color: #020315;
+  background-color: #01010d;
   background-image: url("/landing/bg-pattern.svg");
   background-repeat: repeat;
   background-position: center;
