@@ -261,10 +261,8 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* CS-127 / CS-130 — shared chrome: header pills + Contact us (no outer ring) */
+/* CS-127 / CS-130 — chrome token (Contact us; header uses CS-137 override below) */
 .crcle-liquid-glass-chrome,
-[data-header-pill="true"].crcle-liquid-glass,
-[data-header-menu-trigger="true"].crcle-liquid-glass,
 [data-contact-cluster].crcle-liquid-glass {
   border: 0 solid transparent;
   outline: none;
@@ -273,6 +271,23 @@ body {
     to bottom,
     rgb(255 255 255 / 0.1725),
     rgb(255 255 255 / 0.0575)
+  );
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* CS-137 — header signal + menu pills: no visible outline, +5% glass fill opacity */
+[data-header-pill="true"].crcle-liquid-glass,
+[data-header-menu-trigger="true"].crcle-liquid-glass {
+  border: 0;
+  border-width: 0;
+  outline: none;
+  background-color: rgb(255 255 255 / 0.042);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.181125),
+    rgb(255 255 255 / 0.060375)
   );
   box-shadow: 0 8px 32px rgb(0 0 0 / 0.37);
   backdrop-filter: blur(12px);
