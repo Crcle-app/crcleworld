@@ -2,6 +2,7 @@
 
 import { Canvas, useFrame, useThree, type ThreeEvent } from "@react-three/fiber";
 import { useTexture } from "@react-three/drei";
+import Image from "next/image";
 import {
   Suspense,
   useCallback,
@@ -12,7 +13,12 @@ import {
 } from "react";
 import * as THREE from "three";
 
-useTexture.preload("/landing/hero-logo.png");
+/** High-res hero mark (~2952×2918) — ≥2× largest display (~667px). */
+export const HERO_LOGO_MARK = "/landing/crcle-logo-mark.png";
+export const HERO_LOGO_MARK_WIDTH = 2952;
+export const HERO_LOGO_MARK_HEIGHT = 2918;
+
+useTexture.preload(HERO_LOGO_MARK);
 
 const vertexShader = /* glsl */ `
   varying vec2 vUv;
@@ -239,14 +245,16 @@ function LogoGroup({
   onReady: () => void;
 }) {
   const groupRef = useRef<THREE.Group>(null);
-  const texture = useTexture("/landing/hero-logo.png");
+  const texture = useTexture(HERO_LOGO_MARK);
   const readySent = useRef(false);
+  const { gl } = useThree();
 
   texture.colorSpace = THREE.SRGBColorSpace;
-  texture.minFilter = THREE.LinearFilter;
+  texture.generateMipmaps = true;
+  texture.minFilter = THREE.LinearMipmapLinearFilter;
   texture.magFilter = THREE.LinearFilter;
   texture.premultiplyAlpha = false;
-  texture.anisotropy = 4;
+  texture.anisotropy = Math.min(16, gl.capabilities.getMaxAnisotropy());
 
   useFrame((_, delta) => {
     const group = groupRef.current;
@@ -304,11 +312,20 @@ export function LiquidLogo() {
     <div className="relative h-full w-full">
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-0 bg-contain bg-center bg-no-repeat transition-opacity duration-500 ease-out ${
+        className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ease-out ${
           canvasReady ? "opacity-0" : "opacity-100"
         }`}
-        style={{ backgroundImage: "url(/landing/hero-logo.png)" }}
-      />
+      >
+        <Image
+          src={HERO_LOGO_MARK}
+          alt=""
+          width={HERO_LOGO_MARK_WIDTH}
+          height={HERO_LOGO_MARK_HEIGHT}
+          sizes="(max-width: 640px) 70vw, 667px"
+          className="h-full w-full object-contain object-center"
+          priority
+        />
+      </div>
       <Canvas
         orthographic
         camera={{ position: [0, 0, 4], near: 0.1, far: 20, zoom: 1 }}
@@ -318,7 +335,7 @@ export function LiquidLogo() {
           premultipliedAlpha: false,
           powerPreference: "high-performance",
         }}
-        dpr={[1, 1.75]}
+        dpr={[1, 2]}
         className={`h-full w-full touch-none transition-opacity duration-500 ease-out ${
           canvasReady ? "opacity-100" : "opacity-0"
         }`}
