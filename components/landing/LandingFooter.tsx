@@ -77,17 +77,19 @@ export function LandingFooter() {
 
       {/* CS-132 — mobile: accounts left / contact right, mirror header gutters */}
       <div
-        className="pointer-events-none fixed z-[45] flex w-full items-end justify-between overflow-visible crcle-gutter-inset-x max-sm:bottom-[calc(var(--legal-footer-height)+12px)] sm:hidden"
+        className="pointer-events-none fixed right-0 left-0 z-[45] max-sm:bottom-[calc(var(--legal-footer-height)+12px)] sm:hidden"
         data-footer-mobile-band
       >
+        <div className="mx-auto grid max-w-[1728px] grid-cols-[1fr_auto] items-end overflow-visible px-6">
         <div
-          className="pointer-events-auto origin-bottom-left scale-[0.8075]"
+          className="pointer-events-auto origin-bottom-left scale-[0.8075] justify-self-start"
           data-footer-connected-mobile
         >
           <ConnectedAccounts />
         </div>
-        <div className="pointer-events-auto origin-bottom-right">
+        <div className="pointer-events-auto justify-self-end">
           <ContactUsCluster />
+        </div>
         </div>
       </div>
 
