@@ -20,10 +20,6 @@ export function LegalInformationFooter() {
           <a href="#privacy" className="transition-colors hover:text-[#f7f6f2]/85">
             privacy
           </a>
-          <span aria-hidden>·</span>
-          <a href="#enquiries" className="transition-colors hover:text-[#f7f6f2]/85">
-            enquiries
-          </a>
         </nav>
       </div>
     </footer>
