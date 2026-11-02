@@ -24,7 +24,7 @@ export default function Home() {
       </div>
 
       <div
-        className="pointer-events-none absolute right-0 bottom-0 z-20 w-[min(92vw,369px)] max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 sm:w-[45vw] sm:min-w-[320px] sm:max-w-[620px] sm:translate-x-0"
+        className="pointer-events-none absolute right-0 bottom-0 z-10 w-[min(72vw,300px)] max-sm:left-1/2 max-sm:right-auto max-sm:-translate-x-1/2 max-sm:max-h-[36vh] sm:z-20 sm:w-[45vw] sm:min-w-[320px] sm:max-w-[620px] sm:max-h-none sm:translate-x-0"
         data-testid="hero-phone-arm"
       >
         <Image
@@ -32,7 +32,7 @@ export default function Home() {
           alt="Hand holding phone with crcle app"
           width={1652}
           height={1402}
-          className="h-auto w-full object-contain"
+          className="h-auto max-h-[36vh] w-full object-contain object-bottom sm:max-h-none"
           priority
         />
       </div>

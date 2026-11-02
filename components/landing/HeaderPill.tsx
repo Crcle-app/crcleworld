@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
 
 const pillShellClass =
-  "crcle-liquid-glass relative box-border flex h-10 w-10 items-center justify-center rounded-full p-[3px] sm:h-[46px] sm:w-[46px] sm:p-[3.5px]";
+  "crcle-liquid-glass crcle-liquid-glass-chrome relative box-border flex h-10 w-10 items-center justify-center rounded-full p-[3px] sm:h-[46px] sm:w-[46px] sm:p-[3.5px]";
 
 const buttonClass =
   "relative z-10 flex size-[34px] shrink-0 items-center justify-center rounded-full sm:size-[39px]";

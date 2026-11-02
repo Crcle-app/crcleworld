@@ -76,22 +76,22 @@ export function LandingFooter() {
       </footer>
 
       <div
-        className="pointer-events-none absolute z-30 crcle-gutter-right bottom-[calc(5.5rem+10px)] flex flex-col items-end gap-4 sm:bottom-[calc(6.75rem+10px)] sm:gap-5 lg:bottom-[calc(9.75rem+10px)]"
+        className="pointer-events-none absolute z-40 crcle-gutter-right flex flex-col items-end gap-3 max-sm:bottom-[calc(var(--legal-footer-height)+12px)] bottom-[calc(5.5rem+10px)] sm:bottom-[calc(6.75rem+10px)] sm:gap-5 lg:bottom-[calc(9.75rem+10px)]"
         data-footer-contact
       >
         <div className="pointer-events-auto hidden sm:block">
+          <ConnectedAccounts />
+        </div>
+        <div
+          className="pointer-events-auto origin-bottom-right scale-[0.85] sm:hidden"
+          data-footer-connected-mobile
+        >
           <ConnectedAccounts />
         </div>
         <div className="pointer-events-auto">
           <ContactUsCluster />
         </div>
       </div>
-
-      <aside className="pointer-events-none absolute z-30 bottom-[9.25rem] left-1/2 -translate-x-1/2 sm:hidden">
-        <div className="pointer-events-auto origin-bottom scale-[0.85]">
-          <ConnectedAccounts />
-        </div>
-      </aside>
 
       <div
         className="pointer-events-none absolute z-30 hidden crcle-gutter-left bottom-[5.5rem] sm:block lg:bottom-[9.75rem]"

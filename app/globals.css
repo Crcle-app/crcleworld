@@ -4,6 +4,7 @@
   --background: #050508;
   --foreground: #f7f6f2;
   --crcle-bg: #01010d;
+  --legal-footer-height: 88px;
   --crcle-ink: #f7f6f2;
   --crcle-muted: #676874;
   --crcle-muted-light: #9998a1;
@@ -52,6 +53,10 @@ body {
 }
 
 @media (min-width: 640px) {
+  :root {
+    --legal-footer-height: 104px;
+  }
+
   .crcle-gutter-right {
     right: max(2.5rem, calc((100vw - 1728px) / 2 + 2.5rem));
   }
@@ -88,6 +93,23 @@ body {
   background-repeat: repeat;
   background-position: center;
   opacity: 0.22;
+}
+
+/* CS-129 — static hero rings (no moving dash/glow animation) */
+.hero-ring-glow-stroke {
+  stroke-dasharray: none;
+  stroke-dashoffset: 0;
+  shape-rendering: geometricPrecision;
+}
+
+.hero-ring-glow-stroke--outer {
+  filter: drop-shadow(0 0 4px rgb(247 246 242 / 0.18));
+  opacity: 0.62;
+}
+
+.hero-ring-glow-stroke--inner {
+  opacity: 0.4;
+  filter: drop-shadow(0 0 3px rgb(247 246 242 / 0.12));
 }
 
 .liquid-pill {
@@ -256,16 +278,27 @@ body {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* CS-127 / CS-130 — shared chrome: header pills + Contact us (no outer ring) */
+.crcle-liquid-glass-chrome,
+[data-header-pill="true"].crcle-liquid-glass,
+[data-header-menu-trigger="true"].crcle-liquid-glass,
+[data-contact-cluster].crcle-liquid-glass {
+  border: 0 solid transparent;
+  outline: none;
+  background-color: rgb(255 255 255 / 0.04);
+  background-image: linear-gradient(
+    to bottom,
+    rgb(255 255 255 / 0.1725),
+    rgb(255 255 255 / 0.0575)
+  );
+  box-shadow: 0 8px 32px rgb(0 0 0 / 0.37);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
 .crcle-liquid-glass-disc {
   background: #fff;
   box-shadow: 0 2px 10px rgb(0 0 0 / 0.2);
-}
-
-/* Footer Contact us — frost hero phone/arm behind pill */
-[data-contact-cluster] {
-  background-color: rgb(0 0 0 / 0.26);
-  backdrop-filter: blur(41px) saturate(162%);
-  -webkit-backdrop-filter: blur(41px) saturate(162%);
 }
 
 [data-contact-cluster] .crcle-liquid-glass-disc {
