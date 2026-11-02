@@ -25,16 +25,10 @@ const vertexShader = /* glsl */ `
 const fragmentShader = /* glsl */ `
   uniform sampler2D uTexture;
   uniform vec2 uMouse;
-  uniform vec2 uTexel;
   uniform float uTime;
   uniform float uStrength;
   uniform float uOpacity;
   varying vec2 vUv;
-
-  float layerAlpha(vec2 uv) {
-    vec4 s = texture2D(uTexture, uv);
-    return s.a;
-  }
 
   void main() {
     vec2 toMouse = vUv - uMouse;
@@ -56,25 +50,8 @@ const fragmentShader = /* glsl */ `
     vec4 cg = texture2D(uTexture, uvG);
     vec4 cb = texture2D(uTexture, uvB);
 
-    vec3 color = vec3(cr.r, cg.g, cb.b);
-    float a = max(max(cr.a, cg.a), cb.a);
-
-    float edge =
-      abs(a - layerAlpha(uvG + vec2(uTexel.x, 0.0))) +
-      abs(a - layerAlpha(uvG - vec2(uTexel.x, 0.0))) +
-      abs(a - layerAlpha(uvG + vec2(0.0, uTexel.y))) +
-      abs(a - layerAlpha(uvG - vec2(0.0, uTexel.y)));
-    float outline = smoothstep(0.02, 0.14, edge) * 0.1725;
-    color = mix(color, vec3(0.98, 0.965, 0.945), outline);
-
-    vec2 sunDir = normalize(vec2(-0.58, 0.82));
-    vec2 fromCenter = normalize(vUv - 0.5 + vec2(0.0001));
-    float sun = clamp(dot(sunDir, fromCenter) * 0.38 + 0.08, 0.0, 0.2);
-    vec3 warmSun = vec3(1.0, 0.9, 0.72);
-    color += color * sun * warmSun * (0.35 + a * 0.45);
-
-    a *= uOpacity;
-    gl_FragColor = vec4(color, a);
+    float a = max(max(cr.a, cg.a), cb.a) * uOpacity;
+    gl_FragColor = vec4(cr.r, cg.g, cb.b, a);
   }
 `;
 
@@ -105,13 +82,6 @@ type InteractionState = {
 
 const DRAG_SPIN = 0.008;
 const WHEEL_SPIN = 0.0012;
-
-function texturePixelSize(texture: THREE.Texture): { width: number; height: number } {
-  const img = texture.image as { width?: number; height?: number } | undefined;
-  const width = img?.width && img.width > 0 ? img.width : 1024;
-  const height = img?.height && img.height > 0 ? img.height : 1024;
-  return { width, height };
-}
 
 function pushRipple(
   pointer: PointerState,
@@ -165,12 +135,6 @@ function GlassLayer({
     () => ({
       uTexture: { value: texture },
       uMouse: { value: new THREE.Vector2(0.5, 0.5) },
-      uTexel: {
-        value: (() => {
-          const { width, height } = texturePixelSize(texture);
-          return new THREE.Vector2(1 / width, 1 / height);
-        })(),
-      },
       uTime: { value: 0 },
       uStrength: { value: 0 },
       uOpacity: { value: opacity },
@@ -191,8 +155,6 @@ function GlassLayer({
     mat.uniforms.uMouse.value.copy(pointer.current);
     mat.uniforms.uTime.value = state.clock.elapsedTime;
     mat.uniforms.uStrength.value = pointer.strength;
-    const { width, height } = texturePixelSize(texture);
-    mat.uniforms.uTexel.value.set(1 / width, 1 / height);
   });
 
   return (
@@ -281,11 +243,10 @@ function LogoGroup({
   const readySent = useRef(false);
 
   texture.colorSpace = THREE.SRGBColorSpace;
+  texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;
   texture.premultiplyAlpha = false;
-  texture.anisotropy = 8;
-  texture.generateMipmaps = true;
-  texture.minFilter = THREE.LinearMipmapLinearFilter;
+  texture.anisotropy = 4;
 
   useFrame((_, delta) => {
     const group = groupRef.current;
@@ -357,7 +318,7 @@ export function LiquidLogo() {
           premultipliedAlpha: false,
           powerPreference: "high-performance",
         }}
-        dpr={[1, 2]}
+        dpr={[1, 1.75]}
         className={`h-full w-full touch-none transition-opacity duration-500 ease-out ${
           canvasReady ? "opacity-100" : "opacity-0"
         }`}

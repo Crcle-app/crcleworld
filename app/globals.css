@@ -95,23 +95,6 @@ body {
   opacity: 0.22;
 }
 
-/* CS-129 — static hero rings (no moving dash/glow animation) */
-.hero-ring-glow-stroke {
-  stroke-dasharray: none;
-  stroke-dashoffset: 0;
-  shape-rendering: geometricPrecision;
-}
-
-.hero-ring-glow-stroke--outer {
-  filter: drop-shadow(0 0 4px rgb(247 246 242 / 0.18));
-  opacity: 0.62;
-}
-
-.hero-ring-glow-stroke--inner {
-  opacity: 0.4;
-  filter: drop-shadow(0 0 3px rgb(247 246 242 / 0.12));
-}
-
 .liquid-pill {
   isolation: isolate;
   background:
