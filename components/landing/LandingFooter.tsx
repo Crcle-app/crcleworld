@@ -75,17 +75,28 @@ export function LandingFooter() {
         <MobileTagline />
       </footer>
 
+      {/* CS-132 — mobile: accounts left / contact right, mirror header gutters */}
       <div
-        className="pointer-events-none absolute z-40 crcle-gutter-right flex flex-col items-end gap-3 max-sm:bottom-[calc(var(--legal-footer-height)+12px)] bottom-[calc(5.5rem+10px)] sm:bottom-[calc(6.75rem+10px)] sm:gap-5 lg:bottom-[calc(9.75rem+10px)]"
-        data-footer-contact
+        className="pointer-events-none absolute z-40 crcle-gutter-inset-x flex items-end justify-between max-sm:bottom-[calc(var(--legal-footer-height)+12px)] sm:hidden"
+        data-footer-mobile-band
       >
-        <div className="pointer-events-auto hidden sm:block">
-          <ConnectedAccounts />
-        </div>
         <div
-          className="pointer-events-auto origin-bottom-right scale-[0.85] sm:hidden"
+          className="pointer-events-auto origin-bottom-left scale-[0.8075]"
           data-footer-connected-mobile
         >
+          <ConnectedAccounts />
+        </div>
+        <div className="pointer-events-auto origin-bottom-right">
+          <ContactUsCluster />
+        </div>
+      </div>
+
+      {/* Desktop — stacked right column (unchanged) */}
+      <div
+        className="pointer-events-none absolute z-40 crcle-gutter-right bottom-[calc(5.5rem+10px)] hidden flex-col items-end gap-5 sm:flex sm:bottom-[calc(6.75rem+10px)] lg:bottom-[calc(9.75rem+10px)]"
+        data-footer-contact
+      >
+        <div className="pointer-events-auto">
           <ConnectedAccounts />
         </div>
         <div className="pointer-events-auto">
